@@ -1,8 +1,8 @@
 ﻿namespace RhSystem.Models
 {
+    using System;
     using System.Text;
     using System.Security.Cryptography;
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class User
