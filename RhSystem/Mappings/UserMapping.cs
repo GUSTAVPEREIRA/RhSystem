@@ -11,6 +11,7 @@
             builder.Entity<User>().Property(p => p.CreatedAt).HasDefaultValue(DateTime.Now);
             builder.Entity<User>().Property(p => p.UpdatedAt).HasDefaultValue(DateTime.Now);
             builder.Entity<User>().Property(p => p.DeletedAt).HasDefaultValue(new Nullable<DateTime>());
+            builder.Entity<User>().HasIndex(i => i.Username).IsUnique().HasFilter(null);
         }
     }
 }

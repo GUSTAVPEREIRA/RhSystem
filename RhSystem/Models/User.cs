@@ -11,6 +11,7 @@
 
         [Required(ErrorMessage = "O campo \"Username\" não pode ser vazio!")]
         [StringLength(20, MinimumLength = 3, ErrorMessage = "O username deve conter entre 3 a 15 caracteres!")]
+        
         public string Username { get; set; }
         
         [Required(ErrorMessage = "O campo \"Senha\" não pode ser vazio!")]

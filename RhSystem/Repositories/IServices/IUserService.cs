@@ -1,7 +1,9 @@
 ﻿namespace RhSystem.Repositories.IServices
 {
-    interface IUserService
-    {
+    using RhSystem.Models;
 
+    public interface IUserService
+    {
+        User GetUserForAuthenticate(string username, string password);
     }
 }

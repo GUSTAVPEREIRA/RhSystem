@@ -1,16 +1,16 @@
 namespace RhSystem
 {
+    using RHSystem;
+    using System.Text;
     using RhSystem.Repositories;
-    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.IdentityModel.Tokens;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using System.Text;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.IdentityModel.Tokens;
-    using Microsoft.EntityFrameworkCore;
-    using RHSystem;
 
     public class Startup
     {
@@ -42,7 +42,6 @@ namespace RhSystem
                     ValidateAudience = false
                 };
             });
-
 
             services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(options =>
             {
