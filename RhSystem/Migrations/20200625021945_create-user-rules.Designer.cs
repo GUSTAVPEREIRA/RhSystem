@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RHSystem;
@@ -9,9 +10,10 @@ using RHSystem;
 namespace RhSystem.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20200625021945_create-user-rules")]
+    partial class createuserrules
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,7 +237,7 @@ namespace RhSystem.Migrations
                         .HasColumnType("character varying(100)")
                         .HasMaxLength(100);
 
-                    b.Property<int>("RulesId")
+                    b.Property<int?>("RulesId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -350,10 +352,8 @@ namespace RhSystem.Migrations
             modelBuilder.Entity("RhSystem.Models.User", b =>
                 {
                     b.HasOne("RhSystem.Models.UserRules", "Rules")
-                        .WithMany("Users")
-                        .HasForeignKey("RulesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("RulesId");
                 });
 #pragma warning restore 612, 618
         }

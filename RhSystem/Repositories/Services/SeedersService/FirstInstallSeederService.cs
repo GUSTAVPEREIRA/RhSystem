@@ -21,15 +21,18 @@
         {
             try
             {
+
+                UserRules userRules = new UserRules("ADMIN", true, true);                
                 User user = new User("ADMIN", "ADMIN");
+                user.Rules = userRules;
 
                 if (_userService.GetUser(user.Username, user.Password) != null)
                 {
                     throw new Exception("Usuário já está criado no banco de dados!");
                 }
 
-                this._context.TbUsers.Add(user);
-                this._context.SaveChanges();
+                _context.TbUsers.Add(user);
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {

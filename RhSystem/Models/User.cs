@@ -17,16 +17,17 @@
         [Required(ErrorMessage = "O campo \"Senha\" não pode ser vazio!")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "A senha deve conter entre 3 a 15 caracteres!")]
         public string Password { get; private set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+        public DateTime? DeletedAt { get; private set; }        
+        public UserRules Rules { get; set; }        
 
         public User(string username, string password)
         {
             this.Username = username;
             this.SetPassword(password);
-            this.CreatedAt = DateTime.Now.Date;
-            this.UpdatedAt = DateTime.Now.Date;            
+            this.CreatedAt = DateTime.UtcNow.Date;
+            this.UpdatedAt = DateTime.UtcNow.Date;            
         }
 
         public void SetPassword(string password)
@@ -43,6 +44,16 @@
             }
 
             this.Password = keyPassword.ToString();
+        }
+
+        public void SetDeletedAt()
+        {
+            DeletedAt = DateTime.UtcNow.Date;
+        }
+
+        public void RemoveDeletedAt()
+        {
+            DeletedAt = new Nullable<DateTime>();
         }
     }
 }

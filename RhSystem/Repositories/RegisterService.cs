@@ -12,6 +12,7 @@
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRulesService, UserRulesService>();
             services.AddScoped<IFirstInstallSeederService, FirstInstallSeederService>();
         }
     }

@@ -8,6 +8,7 @@
     public class ApplicationContext : IdentityDbContext
     {
         public DbSet<User> TbUsers { get; set; }        
+        public DbSet<UserRules> TbUserRules { get; set; }        
 
         public ApplicationContext()
         {
@@ -21,7 +22,9 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            new UserMapping().Mapping(ref builder);            
+            new UserMapping().Mapping(ref builder);
+            new UserRulesMapping().Mapping(ref builder);
+
             base.OnModelCreating(builder);
         }
     }
