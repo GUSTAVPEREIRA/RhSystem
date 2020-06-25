@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace RhSystem.Migrations
+﻿namespace RhSystem.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class relationuserxuserrules : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

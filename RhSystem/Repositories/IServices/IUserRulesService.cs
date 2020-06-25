@@ -4,6 +4,7 @@
 
     public interface IUserRulesService
     {
-        UserRules CreateRule(UserRules userRules);       
+        UserRules CreateRule(UserRules userRules);
+        UserRules GetUserRulesById(int id);
     }
 }

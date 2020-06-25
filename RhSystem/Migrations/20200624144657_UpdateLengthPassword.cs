@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace RhSystem.Migrations
+﻿namespace RhSystem.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class UpdateLengthPassword : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

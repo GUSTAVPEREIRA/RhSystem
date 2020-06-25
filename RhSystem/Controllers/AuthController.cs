@@ -1,5 +1,6 @@
 ﻿namespace RhSystem.Controllers
 {
+    using System;
     using RhSystem.Models;
     using Microsoft.AspNetCore.Mvc;
     using RhSystem.Repositories.IServices;
@@ -21,21 +22,28 @@
         [HttpPost]
         public ActionResult<dynamic> Authenticate(User user)
         {
-            User validUser = _userService.GetUserForAuthenticate(user.Username, user.Password);
-
-            if (validUser == null)
+            try
             {
-                return NotFound(new { Message = "Usuário não encontrado!"});
+                User validUser = _userService.GetUserForAuthenticate(user.Username, user.Password);
+
+                if (validUser == null)
+                {
+                    return NotFound(new { Message = "Usuário não encontrado!" });
+                }
+
+                var token = _tokenService.GenerateToken(validUser);
+                validUser.SetPassword("");
+
+                return new OkObjectResult(new
+                {
+                    BearerToken = token,
+                    User = validUser
+                });
             }
-
-            var token = _tokenService.GenerateToken(validUser);
-            validUser.SetPassword("");
-
-            return new OkObjectResult(new 
+            catch (Exception ex)
             {
-                BearerToken = token, 
-                User = validUser 
-            });
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using RHSystem;
+    using System.Linq;
     using RhSystem.Models;
     using RhSystem.Repositories.IServices;
 
@@ -26,9 +27,22 @@
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
+
+        public UserRules GetUserRulesById(int id)
+        {
+            try
+            {
+                var userRules = _context.TbUserRules.Where(w => w.Id == id).FirstOrDefault();
+                return userRules;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

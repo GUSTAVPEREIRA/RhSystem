@@ -3,15 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
+    using System.Runtime.Serialization;
+    using System.Text.Json.Serialization;
 
     public class UserRules
     {
        
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "O campo \'Nome\' da regra é obrigatório!")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "O campo \'Nome\' deve ter entre 3 a 50 caracteres!")]
+        public int Id { get; set; }        
         public string Name { get; set; }
 
         [DefaultValue(false)]
@@ -22,6 +20,9 @@
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; private set; }
+
+        [JsonIgnore]
+        [IgnoreDataMember]
         public List<User> Users { get; set; }
         public UserRules(string name, bool isAdmin, bool physicalExclusion)
         {

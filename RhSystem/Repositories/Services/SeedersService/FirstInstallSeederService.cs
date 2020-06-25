@@ -21,7 +21,6 @@
         {
             try
             {
-
                 UserRules userRules = new UserRules("ADMIN", true, true);                
                 User user = new User("ADMIN", "ADMIN");
                 user.Rules = userRules;

@@ -10,7 +10,8 @@
         {
             builder.Entity<UserRules>().Property(p => p.CreatedAt).HasDefaultValue(DateTime.UtcNow.Date);
             builder.Entity<UserRules>().Property(p => p.UpdatedAt).HasDefaultValue(DateTime.UtcNow.Date);
-            builder.Entity<UserRules>().Property(p => p.DeletedAt).HasDefaultValue(new Nullable<DateTime>());            
+            builder.Entity<UserRules>().Property(p => p.DeletedAt).HasDefaultValue(new Nullable<DateTime>());
+            builder.Entity<UserRules>().Property(p => p.Name).IsRequired().HasMaxLength(50);            
         }
     }
 }

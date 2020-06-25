@@ -14,7 +14,6 @@
             _firstInstallSeeder = firstInstallSeeder;
         }
 
-
         [Route("FirstInstall")]
         [HttpPost]
         public ActionResult<dynamic> FirstInstall()

@@ -11,7 +11,6 @@ namespace RhSystem
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.IdentityModel.Logging;
 
     public class Startup
     {
@@ -25,12 +24,15 @@ namespace RhSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            services.AddMvcCore().AddNewtonsoftJson();
+            services.AddControllers();
+
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             new RegisterService().Register(ref services);
 
-            IdentityModelEventSource.ShowPII = true;
-
-            services.AddAuthentication( x => {
+            services.AddAuthentication(x =>
+            {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
@@ -50,10 +52,6 @@ namespace RhSystem
             {
                 options.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection"));
             });
-
-            services.AddCors();
-            services.AddMvcCore().AddNewtonsoftJson();
-            services.AddControllers();           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,8 +65,8 @@ namespace RhSystem
             app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
