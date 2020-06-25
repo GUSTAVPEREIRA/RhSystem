@@ -16,19 +16,45 @@
             _context = context;
         }
 
-        public User GetUserForAuthenticate(string username, string password)
+        public User GetUser(string username, string password)
         {
             try
             {
-                User user = _context.TbUsers.Where(w => w.Username.Equals(username) && w.Password.Equals(password))
-                    .FirstOrDefault();
+                User user = this.SearchUser(username, password);
                 
                 return user;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        
+        public User GetUserForAuthenticate(string username, string password)
+        {
+            try
+            {
+                User user = this.SearchUser(username, password);
+
+                if (user == null)
+                {
+                    throw new Exception("Username ou Senha inválidos!");
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }           
+        }
+
+        private User SearchUser(string username, string password)
+        {
+            User user = _context.TbUsers.Where(w => w.Username.Equals(username) && w.Password.Equals(password))
+                    .FirstOrDefault();
+
+            return user;
         }
     }
 }

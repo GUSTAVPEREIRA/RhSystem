@@ -22,7 +22,7 @@
                     new Claim(ClaimTypes.Name, user.Username)
                     //new Caim(ClaimTypes.Role, user.)
                 }),
-                Expires = DateTime.Now.AddHours(2),
+                Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials
                 (
                     new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature

@@ -15,12 +15,19 @@
         public string Username { get; set; }
         
         [Required(ErrorMessage = "O campo \"Senha\" não pode ser vazio!")]
-        [StringLength(20, MinimumLength = 3, ErrorMessage = "A senha deve conter entre 3 a 15 caracteres!")]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "A senha deve conter entre 3 a 15 caracteres!")]
         public string Password { get; private set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }        
+        public DateTime? DeletedAt { get; set; }
 
+        public User(string username, string password)
+        {
+            this.Username = username;
+            this.SetPassword(password);
+            this.CreatedAt = DateTime.Now.Date;
+            this.UpdatedAt = DateTime.Now.Date;            
+        }
 
         public void SetPassword(string password)
         {

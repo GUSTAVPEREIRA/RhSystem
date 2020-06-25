@@ -11,6 +11,7 @@ namespace RhSystem
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.IdentityModel.Logging;
 
     public class Startup
     {
@@ -25,8 +26,10 @@ namespace RhSystem
         public void ConfigureServices(IServiceCollection services)
         {
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
-            new RegisterService().Register(ref services);        
-            
+            new RegisterService().Register(ref services);
+
+            IdentityModelEventSource.ShowPII = true;
+
             services.AddAuthentication( x => {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
