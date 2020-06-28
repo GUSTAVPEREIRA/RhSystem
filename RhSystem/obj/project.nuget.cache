@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2yOBDBzTrXCdmT8oDk4+qL2kzqzoL4o86UzyPFf/O4N7wzltr1VCSdBGpFPynbBgZClzqvZYJ9UJFaIIyQRD2w==",
+  "dgSpecHash": "X5kntGtbqezHZDcufNcQBwBY+VXfAliTk3ctCLO0fknjxHNwZYxKiBTqZzVPvaGXH9U6tzY0arUiKx0KBvKI2Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj",
   "expectedPackageFiles": [
@@ -82,6 +82,7 @@
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\gugup\\.nuget\\packages\\microsoft.testplatform\\16.6.1\\microsoft.testplatform.16.6.1.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\3.1.3\\microsoft.visualstudio.web.codegeneration.3.1.3.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.contracts\\3.1.3\\microsoft.visualstudio.web.codegeneration.contracts.3.1.3.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\3.1.3\\microsoft.visualstudio.web.codegeneration.core.3.1.3.nupkg.sha512",

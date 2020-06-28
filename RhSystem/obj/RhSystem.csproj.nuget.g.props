@@ -17,6 +17,7 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_CodeAnalysis_Analyzers Condition=" '$(PkgMicrosoft_CodeAnalysis_Analyzers)' == '' ">C:\Users\gugup\.nuget\packages\microsoft.codeanalysis.analyzers\2.9.4</PkgMicrosoft_CodeAnalysis_Analyzers>
+    <PkgMicrosoft_TestPlatform Condition=" '$(PkgMicrosoft_TestPlatform)' == '' ">C:\Users\gugup\.nuget\packages\microsoft.testplatform\16.6.1</PkgMicrosoft_TestPlatform>
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\gugup\.nuget\packages\microsoft.entityframeworkcore.tools\3.1.5</PkgMicrosoft_EntityFrameworkCore_Tools>
   </PropertyGroup>
 </Project>

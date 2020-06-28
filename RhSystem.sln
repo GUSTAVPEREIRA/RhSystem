@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhSystem", "RhSystem\RhSystem.csproj", "{DE703452-6BDB-4539-82DA-CE482F9EDD9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RhSystem", "RhSystem\RhSystem.csproj", "{DE703452-6BDB-4539-82DA-CE482F9EDD9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B01FFB3A-B679-4716-91C7-638D8915D8B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{079D6804-A744-4B06-A003-6199E1E7BDBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RhSystem.Tests", "RhSystem.Tests\RhSystem.Tests.csproj", "{3F62395F-1690-4C5C-878A-9FCDA8AEBE64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,17 @@ Global
 		{DE703452-6BDB-4539-82DA-CE482F9EDD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE703452-6BDB-4539-82DA-CE482F9EDD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE703452-6BDB-4539-82DA-CE482F9EDD9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F62395F-1690-4C5C-878A-9FCDA8AEBE64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F62395F-1690-4C5C-878A-9FCDA8AEBE64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F62395F-1690-4C5C-878A-9FCDA8AEBE64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F62395F-1690-4C5C-878A-9FCDA8AEBE64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DE703452-6BDB-4539-82DA-CE482F9EDD9E} = {B01FFB3A-B679-4716-91C7-638D8915D8B8}
+		{3F62395F-1690-4C5C-878A-9FCDA8AEBE64} = {079D6804-A744-4B06-A003-6199E1E7BDBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9DFC697-2338-42A6-A7D1-31C30141F211}
