@@ -4,6 +4,7 @@
     using RHSystem;
     using System.Linq;
     using RhSystem.Models;
+    using Microsoft.EntityFrameworkCore;
     using RhSystem.Repositories.IServices;
 
     public class UserService : IUserService
@@ -14,11 +15,6 @@
         public UserService(ApplicationContext context)
         {
             _context = context;
-        }
-
-        public User CreateUserAsync(User user)
-        {
-            return null;
         }
 
         public User GetUser(string username, string password)
@@ -63,7 +59,8 @@
                 if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
                 {
                     user = _context.TbUsers.Where(w => w.Username.Equals(username) && w.Password.Equals(password))
-                    .FirstOrDefault();
+                        .Include(i => i.Rules)
+                        .FirstOrDefault();
                 }
                 else
                 {
@@ -89,6 +86,9 @@
 
                 this._context.TbUsers.Add(user);
                 this._context.SaveChanges();
+
+                user.SetPassword("");
+
                 return user;
             }
             catch (Exception ex)
@@ -97,5 +97,76 @@
             }
         }
 
+        public User DeleteUser(int id)
+        {
+            try
+            {
+
+                User user = this.SerachById(id);
+                user.SetDeletedAt();
+                _context.Update(user).State = EntityState.Modified;
+                _context.SaveChanges();
+                user.SetPassword("");
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public User GetUserForId(int id)
+        {
+            try
+            {
+                User user = this.SerachById(id);
+                user.SetPassword("");
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private User SerachById(int id)
+        {
+            User user = _context.TbUsers.Where(w => w.Id == id).Include(i => i.Rules).AsNoTracking().FirstOrDefault();
+
+            if (user == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+            
+            return user;
+        }
+
+        public User UpdateUser(User user)
+        {
+            try
+            {
+                //Because this as no tracking exist, for two entitys tracking same objeto in this time 
+                User updatedUser = _context.TbUsers.Where(w => w.Id == user.Id).AsNoTracking().FirstOrDefault();
+
+                if (updatedUser == null)
+                {
+                    throw new Exception("Usuário não encontrado!");
+                }
+
+                if (updatedUser.DeletedAt != null)
+                {
+                    throw new Exception("Este usuário não está ativo!");
+                }
+
+                _context.Entry(user).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

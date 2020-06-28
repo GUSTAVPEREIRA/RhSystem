@@ -14,6 +14,8 @@
         public DateTime? DeletedAt { get; private set; }
         public UserRules Rules { get; set; }
 
+        public int RulesId { get; set; }
+
         public User(string username, string password)
         {
             this.Username = username;

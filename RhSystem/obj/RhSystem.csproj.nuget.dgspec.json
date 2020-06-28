@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RhSystem\\RhSystem\\RhSystem.csproj": {}
+    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RhSystem\\RhSystem\\RhSystem.csproj": {
+    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RhSystem\\RhSystem\\RhSystem.csproj",
+        "projectUniqueName": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj",
         "projectName": "RhSystem",
-        "projectPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RhSystem\\RhSystem\\RhSystem.csproj",
+        "projectPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj",
         "packagesPath": "C:\\Users\\gugup\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RhSystem\\RhSystem\\obj\\",
+        "outputPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gugup\\AppData\\Roaming\\NuGet\\NuGet.Config",

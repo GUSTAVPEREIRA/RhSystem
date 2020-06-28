@@ -1,5 +1,7 @@
 ﻿namespace RHSystem
 {
+    using System;
+    using System.Linq;
     using RhSystem.Models;
     using RhSystem.Mappings;
     using Microsoft.EntityFrameworkCore;
@@ -7,8 +9,8 @@
 
     public class ApplicationContext : IdentityDbContext
     {
-        public DbSet<User> TbUsers { get; set; }        
-        public DbSet<UserRules> TbUserRules { get; set; }        
+        public DbSet<User> TbUsers { get; set; }
+        public DbSet<UserRules> TbUserRules { get; set; }
 
         public ApplicationContext()
         {
@@ -26,6 +28,6 @@
             new UserRulesMapping().Mapping(ref builder);
 
             base.OnModelCreating(builder);
-        }
+        }       
     }
 }

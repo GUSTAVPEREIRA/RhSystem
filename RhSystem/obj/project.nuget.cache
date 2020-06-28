@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R7FkN5FLWuJS0MmTSMql8v2/UCInOgHpc8HWzKow4cs5e2yABhRZW8Y1Ek/172nbiHABtRslbQ0CJfTlGPUqbA==",
+  "dgSpecHash": "2yOBDBzTrXCdmT8oDk4+qL2kzqzoL4o86UzyPFf/O4N7wzltr1VCSdBGpFPynbBgZClzqvZYJ9UJFaIIyQRD2w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RhSystem\\RhSystem\\RhSystem.csproj",
+  "projectFilePath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

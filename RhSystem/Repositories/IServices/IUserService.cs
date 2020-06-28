@@ -6,7 +6,9 @@
     {
         User GetUserForAuthenticate(string username, string password);
         User GetUser(string username, string password);
-        User CreateUserAsync(User user);
+        User GetUserForId(int id);        
         User CreateUser(User user);
+        User DeleteUser(int user);
+        User UpdateUser(User user);
     }
 }
