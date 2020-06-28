@@ -101,7 +101,6 @@
         {
             try
             {
-
                 User user = this.SerachById(id);
                 user.SetDeletedAt();
                 _context.Update(user).State = EntityState.Modified;

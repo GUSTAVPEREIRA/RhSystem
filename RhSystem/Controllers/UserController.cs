@@ -5,8 +5,6 @@
     using Microsoft.AspNetCore.Mvc;
     using RhSystem.Repositories.IServices;
     using Microsoft.AspNetCore.Authorization;
-    using System.Net;
-    using System.Net.Http;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -54,8 +52,7 @@
         public ActionResult<dynamic> DeleteUser(int id)
         {
             try
-            {                
-                
+            {                                
                 User user = _userService.DeleteUser(id);
 
                 return new OkObjectResult(new
