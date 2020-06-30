@@ -8,8 +8,8 @@
     {
         public void Mapping(ref ModelBuilder builder)
         {
-            builder.Entity<User>().Property(p => p.CreatedAt).HasDefaultValue(DateTime.UtcNow.Date);
-            builder.Entity<User>().Property(p => p.UpdatedAt).HasDefaultValue(DateTime.UtcNow.Date);
+            builder.Entity<User>().Property(p => p.CreatedAt).HasDefaultValue(DateTime.UtcNow);
+            builder.Entity<User>().Property(p => p.UpdatedAt).HasDefaultValue(DateTime.UtcNow);
             builder.Entity<User>().Property(p => p.DeletedAt).HasDefaultValue(new Nullable<DateTime>());
             builder.Entity<User>().Property(i => i.Username).HasMaxLength(30);
             builder.Entity<User>().Property(i => i.Password).HasMaxLength(100);

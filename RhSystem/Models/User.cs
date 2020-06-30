@@ -20,8 +20,8 @@
         {
             this.Username = username;
             this.SetPassword(password);
-            this.CreatedAt = DateTime.UtcNow.Date;
-            this.UpdatedAt = DateTime.UtcNow.Date;
+            this.CreatedAt = DateTime.UtcNow;
+            this.UpdatedAt = DateTime.UtcNow;
         }
 
         public void SetPassword(string password)
@@ -49,7 +49,7 @@
       
         public void SetDeletedAt()
         {
-            DeletedAt = DateTime.UtcNow.Date;
+            DeletedAt = DateTime.UtcNow;
         }
 
         public void RemoveDeletedAt()
