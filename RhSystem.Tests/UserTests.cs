@@ -58,7 +58,6 @@
 
             _user.RemoveDeletedAt();
 
-
             Assert.Equal(new Nullable<DateTime>(), _user.DeletedAt);
         }
     }
