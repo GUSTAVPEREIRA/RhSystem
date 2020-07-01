@@ -24,8 +24,14 @@
         [JsonIgnore]
         [IgnoreDataMember]
         public List<User> Users { get; set; }
-        public UserRules(string name, bool isAdmin, bool physicalExclusion)
+        public UserRules(string name, bool isAdmin = false, bool physicalExclusion = false)
         {
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("O nome da regra não pode ser vazio!");
+            }
+
             this.Name = name;
             this.IsAdmin = isAdmin;
             this.PhysicalExclusion = physicalExclusion;

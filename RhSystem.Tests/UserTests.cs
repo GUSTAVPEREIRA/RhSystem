@@ -5,8 +5,7 @@
     using RhSystem.Models;
 
     public class UserTests
-    {
-        //Cenário comum
+    {        
         private User _user = new User("ADMIN", "ADMIN")
         {
             Id = 2,
@@ -16,16 +15,18 @@
                 Id = 1
             }
         };
-      
-        [Fact(DisplayName = "Desejo criar um usuário!")]
-        public void CreateUser()
-        {                        
-            Assert.Equal(2, _user.Id);
-            //Um usuário não pode existir sem uma regra definida.
-            Assert.Equal(1, _user.Rules.Id);
-        }
 
-        [Fact(DisplayName = "Desejo alterar um usuário!")]
+        [Theory(DisplayName = "I want to create a user!")]
+        [InlineData("ADMIN", "ADMIN", "ADMIN")]
+        [InlineData("JOSE", "JOSE", "123456")]        
+        public void CreateUser(string expected, string username, string password)
+        {
+            User user = new User(username, password);
+
+            Assert.Equal(expected, user.Username);
+        }
+        
+        [Fact(DisplayName = "I want to change a user!")]
         public void UpdateUser()
         {
 
@@ -34,14 +35,14 @@
             Assert.Equal("ADMIN2", _user.Username);
         }
 
-        [Fact(DisplayName = "Desejo garantir que o password esteja criptografado!")]
+        [Fact(DisplayName = "I want to ensure that the password is encrypted!")]
         public void UserPassword()
         {
             _user.SetPassword("ADMIN");
             Assert.NotEqual("ADMIN", _user.Password);
         }
 
-        [Fact(DisplayName = "Desejo garantir que o usuário foi deletado com exclusão lógica!")]
+        [Fact(DisplayName = "I want to ensure that the user has been deleted with logical exclusion!")]
         public void UserLogicDelete()
         {
             //Cenário
@@ -50,7 +51,7 @@
             Assert.NotEqual(new Nullable<DateTime>(), _user.DeletedAt);
         }
 
-        [Fact(DisplayName = "Desejo garantir que o usuário não esteja mais excluído lógicamente!")]
+        [Fact(DisplayName = "I want to ensure that the user is no longer logically excluded!")]
         public void UserRemoveLogicDelete()
         {
             //Cenário
@@ -59,6 +60,17 @@
             _user.RemoveDeletedAt();
 
             Assert.Equal(new Nullable<DateTime>(), _user.DeletedAt);
+        }   
+        
+        [Theory(DisplayName = "I want to ensure that the username and password fields are not empty, if they are throwing an exception!")]
+        [InlineData("", "ADMIN")]
+        [InlineData("", "")]
+        [InlineData("ADMIN", "")]        
+        public void UserException(string username, string password)
+        {            
+            var exception = Assert.Throws<ArgumentNullException>(() => new User(username, password));
+
+            Assert.Equal("Value cannot be null. (Parameter 'Os campos username e password não podem ser vazios!')", exception.Message);
         }
     }
 }

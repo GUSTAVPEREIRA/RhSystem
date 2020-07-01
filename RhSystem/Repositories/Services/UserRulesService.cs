@@ -4,6 +4,7 @@
     using RHSystem;
     using System.Linq;
     using RhSystem.Models;
+    using Microsoft.EntityFrameworkCore;
     using RhSystem.Repositories.IServices;
 
     public class UserRulesService : IUserRulesService
@@ -44,5 +45,27 @@
             }
         }
 
+        public UserRules UpdateUserRules(UserRules userRules)
+        {
+            try
+            {
+                UserRules existUseRules = _context.TbUserRules.Where(w => w.Id == userRules.Id).AsNoTracking().FirstOrDefault();
+
+                if (existUseRules == null)
+                {
+                    throw new ArgumentException("Regra não encontrada");
+                }
+
+                _context.Entry(userRules).State = EntityState.Modified;
+
+                _context.SaveChanges();
+
+                return userRules;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
+        }
     }
 }

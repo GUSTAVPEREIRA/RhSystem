@@ -3,6 +3,7 @@
     using System;
     using System.Text;
     using System.Security.Cryptography;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class User
     {
@@ -14,10 +15,18 @@
         public DateTime? DeletedAt { get; private set; }
         public UserRules Rules { get; set; }
 
+        [NotMapped]
+        public Employees Employees { get; set; }
+
         public int RulesId { get; set; }
 
         public User(string username, string password)
         {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentNullException("Os campos username e password não podem ser vazios!");
+            }
+
             this.Username = username;
             this.SetPassword(password);
             this.CreatedAt = DateTime.UtcNow;
@@ -27,7 +36,7 @@
         public void SetPassword(string password)
         {
             if (!string.IsNullOrEmpty(password))
-            {                
+            {
                 this.Password = password;
                 StringBuilder keyPassword = new StringBuilder();
                 MD5 md5 = MD5.Create();
@@ -42,11 +51,11 @@
                 this.Password = keyPassword.ToString();
             }
             else
-            {                
+            {
                 this.Password = "";
             }
         }
-      
+
         public void SetDeletedAt()
         {
             DeletedAt = DateTime.UtcNow;

@@ -11,6 +11,7 @@
     {
         public DbSet<User> TbUsers { get; set; }
         public DbSet<UserRules> TbUserRules { get; set; }
+        public DbSet<Employees> TbEmployees { get; set; }
 
         public ApplicationContext()
         {
@@ -26,8 +27,9 @@
         {
             new UserMapping().Mapping(ref builder);
             new UserRulesMapping().Mapping(ref builder);
+            new EmployeesMapping().Mapping(ref builder);
 
             base.OnModelCreating(builder);
-        }       
+        }
     }
 }

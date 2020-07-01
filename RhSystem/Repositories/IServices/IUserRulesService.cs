@@ -6,5 +6,7 @@
     {
         UserRules CreateRule(UserRules userRules);
         UserRules GetUserRulesById(int id);
+        UserRules UpdateUserRules(UserRules userRules);
+
     }
 }
