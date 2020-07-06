@@ -10,5 +10,6 @@
         User CreateUser(User user);
         User DeleteUser(int user);
         User UpdateUser(User user);
+        void PhysicalDelete(User user);
     }
 }

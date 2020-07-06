@@ -3,6 +3,9 @@
     using Xunit;
     using System;
     using RhSystem.Models;
+    using RhSystem.Repositories.Services;
+    using RHSystem;
+    using Microsoft.EntityFrameworkCore;
 
     public class UserTests
     {        
@@ -21,9 +24,16 @@
         [InlineData("JOSE", "JOSE", "123456")]        
         public void CreateUser(string expected, string username, string password)
         {
-            User user = new User(username, password);
+            //Configures provider
+            var options = new DbContextOptionsBuilder<ApplicationContext>().UseInMemoryDatabase("RHSystemTests").Options;
+            var context = new ApplicationContext(options);
 
-            Assert.Equal(expected, user.Username);
+            //Dependence injection
+            var UserService = new UserService(context);
+
+            User user = new User(username, password);
+            var createdUser = UserService.CreateUser(user);
+            Assert.Equal(expected, createdUser.Username);
         }
         
         [Fact(DisplayName = "I want to change a user!")]

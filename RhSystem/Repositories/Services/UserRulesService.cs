@@ -4,6 +4,7 @@
     using RHSystem;
     using System.Linq;
     using RhSystem.Models;
+    using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
     using RhSystem.Repositories.IServices;
 
@@ -66,6 +67,19 @@
             {
                 throw ex;
             }            
+        }
+
+        public List<UserRules> GetUserRules()
+        {
+            try
+            {
+                List<UserRules> lista = _context.TbUserRules.AsNoTracking().ToList();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex; 
+            }
         }
     }
 }

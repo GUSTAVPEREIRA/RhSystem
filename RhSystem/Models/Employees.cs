@@ -24,5 +24,10 @@
             this.Salary = salary;
             this.AdmissionDate = admissionDate;            
         }
+
+        public void LogicDelete()
+        {
+            this.DeletedAt = DateTime.UtcNow;
+        }
     }
 }

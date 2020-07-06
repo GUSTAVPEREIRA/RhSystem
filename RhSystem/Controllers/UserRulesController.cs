@@ -9,7 +9,6 @@
     [ApiController]
     public class UserRulesController : ControllerBase
     {
-
         private readonly IUserRulesService _userRulesService;
 
         public UserRulesController(IUserRulesService userRulesService)
@@ -63,10 +62,30 @@
             try
             {
                 userRules = _userRulesService.UpdateUserRules(userRules);
+
                 return new OkObjectResult(new
                 {
                     Message = "Regra foi atualizada!",
                     UserRules = userRules
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetUserRules")]
+        public ActionResult<dynamic> GetUserRules()
+        {
+            try
+            {
+                var lista = _userRulesService.GetUserRules();
+
+                return new OkObjectResult(new
+                {
+                    UserRules = lista
                 });
             }
             catch (Exception ex)

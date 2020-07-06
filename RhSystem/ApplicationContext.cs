@@ -1,7 +1,5 @@
 ﻿namespace RHSystem
 {
-    using System;
-    using System.Linq;
     using RhSystem.Models;
     using RhSystem.Mappings;
     using Microsoft.EntityFrameworkCore;
@@ -21,6 +19,14 @@
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
 
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {                
+                optionsBuilder.UseNpgsql("User ID=postgres;Password=postgres;Server=localhost;Port=5432; Database=RhSystem; Integrated Security=true;Pooling=true;");            
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

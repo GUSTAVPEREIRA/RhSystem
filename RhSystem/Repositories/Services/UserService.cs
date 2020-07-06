@@ -167,5 +167,18 @@
                 throw ex;
             }
         }
+
+        public void PhysicalDelete(User user)
+        {
+            try
+            {
+                _context.Entry(user).State = EntityState.Deleted;
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
