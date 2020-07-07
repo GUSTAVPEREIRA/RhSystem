@@ -1,86 +1,129 @@
 ﻿namespace RhSystem.Tests
 {
+    using Moq;
     using Xunit;
     using System;
-    using RhSystem.Models;
-    using RhSystem.Repositories.Services;
     using RHSystem;
+    using RhSystem.Models;
     using Microsoft.EntityFrameworkCore;
+    using RhSystem.Repositories.Services;
+    using RhSystem.Repositories.IServices;
 
     public class UserTests
-    {        
-        private User _user = new User("ADMIN", "ADMIN")
+    {
+        private UserService _UserServiceConfigureProvider()
         {
-            Id = 2,
-            RulesId = 1,
-            Rules = new UserRules("ADMIN", true, true)
-            {
-                Id = 1
-            }
-        };
+            var options = new DbContextOptionsBuilder<ApplicationContext>().UseInMemoryDatabase("RHSystemTests").Options;
+            var context = new ApplicationContext(options);
+            return new UserService(context);
+        }
 
         [Theory(DisplayName = "I want to create a user!")]
         [InlineData("ADMIN", "ADMIN", "ADMIN")]
-        [InlineData("JOSE", "JOSE", "123456")]        
+        [InlineData("JOSE", "JOSE", "123456")]
         public void CreateUser(string expected, string username, string password)
         {
-            //Configures provider
-            var options = new DbContextOptionsBuilder<ApplicationContext>().UseInMemoryDatabase("RHSystemTests").Options;
-            var context = new ApplicationContext(options);
+            //Arrange
+            var userService = this._UserServiceConfigureProvider();
 
-            //Dependence injection
-            var UserService = new UserService(context);
-
+            //Act
             User user = new User(username, password);
-            var createdUser = UserService.CreateUser(user);
+            var createdUser = userService.CreateUser(user);
+
+            //Assert
             Assert.Equal(expected, createdUser.Username);
         }
-        
+
         [Fact(DisplayName = "I want to change a user!")]
         public void UpdateUser()
         {
 
-            _user.Username = "ADMIN2";
+            //Arrange
+            var userService = this._UserServiceConfigureProvider();
+            User user = userService.CreateUser(new User("ADMIN2", "ADMIN"));
 
-            Assert.Equal("ADMIN2", _user.Username);
+            //Act
+            user.Username = "ADMIN3";
+            var updatedUser = userService.UpdateUser(user);
+
+            //Assert
+            Assert.Equal("ADMIN3", updatedUser.Username);
         }
 
         [Fact(DisplayName = "I want to ensure that the password is encrypted!")]
         public void UserPassword()
         {
-            _user.SetPassword("ADMIN");
-            Assert.NotEqual("ADMIN", _user.Password);
+            //Arrange
+            User user = new User("ADMIN", "ADMIN2");
+
+            //Act
+            user.SetPassword("ADMIN");
+
+            //Assert
+            Assert.NotEqual("ADMIN", user.Password);
         }
 
         [Fact(DisplayName = "I want to ensure that the user has been deleted with logical exclusion!")]
         public void UserLogicDelete()
         {
-            //Cenário
-            Assert.Equal(new Nullable<DateTime>(), _user.DeletedAt);
-            _user.SetDeletedAt();
-            Assert.NotEqual(new Nullable<DateTime>(), _user.DeletedAt);
+            //Arrange
+            User user = new User("ADMIN", "ADMIN2");
+
+            //Act
+            Assert.Equal(new Nullable<DateTime>(), user.DeletedAt);
+            user.SetDeletedAt();
+
+            //Assert
+            Assert.NotEqual(new Nullable<DateTime>(), user.DeletedAt);
         }
 
         [Fact(DisplayName = "I want to ensure that the user is no longer logically excluded!")]
         public void UserRemoveLogicDelete()
         {
-            //Cenário
-            _user.SetDeletedAt();
+            //Arrange
+            User user = new User("ADMIN", "ADMIN");
+            user.SetDeletedAt();
 
-            _user.RemoveDeletedAt();
+            //Act
+            user.RemoveDeletedAt();
 
-            Assert.Equal(new Nullable<DateTime>(), _user.DeletedAt);
-        }   
-        
+            //Assert
+            Assert.Equal(new Nullable<DateTime>(), user.DeletedAt);
+        }
+
         [Theory(DisplayName = "I want to ensure that the username and password fields are not empty, if they are throwing an exception!")]
         [InlineData("", "ADMIN")]
         [InlineData("", "")]
-        [InlineData("ADMIN", "")]        
+        [InlineData("ADMIN", "")]
         public void UserException(string username, string password)
-        {            
-            var exception = Assert.Throws<ArgumentNullException>(() => new User(username, password));
+        {
+            //Arrange
+            var mock = new Mock<IUserService>();
+            mock.Setup(r => r.CreateUser(It.IsAny<User>()))
+                .Throws(new ArgumentNullException("The username and password fields are not empty!"));
 
-            Assert.Equal("Value cannot be null. (Parameter 'Os campos username e password não podem ser vazios!')", exception.Message);
+            var repo = mock.Object;
+
+            //Act                  
+            Action act = () => repo.CreateUser(new User(username, password));
+
+            //Assert
+            Assert.Throws<ArgumentNullException>(act);
+        }
+
+        [Fact(DisplayName = "I want to ensure that not exists two users with same username!")]
+        public void UsernameException()
+        {
+            //Arrange
+            var mock = new Mock<IUserService>();
+            mock.Setup(r => r.CreateUser(It.IsAny<User>())).Throws(new Exception("Username already registered!"));
+            var repo = mock.Object;
+
+            //Act
+            Action act = () => repo.CreateUser(new User("ADMIN", "ADMIN"));
+
+            //Assert
+            Assert.Throws<Exception>(act);
         }
     }
 }
