@@ -9,5 +9,7 @@
         UserRules GetUserRulesById(int id);
         UserRules UpdateUserRules(UserRules userRules);
         List<UserRules> GetUserRules();
+        UserRules DeletedUserRules(int id);
+        void PhysicalDeletedUserRules(UserRules userRules);
     }
 }

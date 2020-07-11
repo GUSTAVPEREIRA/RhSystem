@@ -7,8 +7,6 @@
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-
-
         [HttpPost]
         [Route("CreateEmployees")]
         public ActionResult<dynamic> CreateEmployees()
@@ -25,7 +23,5 @@
                 return BadRequest(ex.Message);
             }
         }
-
-
     }
 }

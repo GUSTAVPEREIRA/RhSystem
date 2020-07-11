@@ -1,8 +1,8 @@
 ﻿namespace RhSystem.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Collections.Generic;
     using System.Runtime.Serialization;
     using System.Text.Json.Serialization;
 
@@ -26,7 +26,6 @@
         public List<User> Users { get; set; }
         public UserRules(string name, bool isAdmin = false, bool physicalExclusion = false)
         {
-
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException("O nome da regra não pode ser vazio!");

@@ -5,7 +5,6 @@
     using Microsoft.AspNetCore.Mvc;
     using RhSystem.Repositories.IServices;
     using Microsoft.AspNetCore.Authorization;
-    using SQLitePCL;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -81,7 +80,6 @@
                     Message = "Usuário foi atualizado",
                     User = updatedUser
                 });
-
             }
             catch (Exception ex)
             {
@@ -130,7 +128,6 @@
                     Message = "Usuário foi deletado!",
                     Usuario = user.Username
                 });
-
             }
             catch (Exception ex)
             {

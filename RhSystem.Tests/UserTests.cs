@@ -11,7 +11,7 @@
 
     public class UserTests
     {
-        private UserService _UserServiceConfigureProvider()
+        private UserService UserServiceConfigureProvider()
         {
             var options = new DbContextOptionsBuilder<ApplicationContext>().UseInMemoryDatabase("RHSystemTests").Options;
             var context = new ApplicationContext(options);
@@ -24,7 +24,7 @@
         public void CreateUser(string expected, string username, string password)
         {
             //Arrange
-            var userService = this._UserServiceConfigureProvider();
+            var userService = this.UserServiceConfigureProvider();
 
             //Act
             User user = new User(username, password);
@@ -39,7 +39,7 @@
         {
 
             //Arrange
-            var userService = this._UserServiceConfigureProvider();
+            var userService = this.UserServiceConfigureProvider();
             User user = userService.CreateUser(new User("ADMIN2", "ADMIN"));
 
             //Act
@@ -105,7 +105,7 @@
             var repo = mock.Object;
 
             //Act                  
-            Action act = () => repo.CreateUser(new User(username, password));
+            void act() => repo.CreateUser(new User(username, password));
 
             //Assert
             Assert.Throws<ArgumentNullException>(act);
@@ -120,10 +120,33 @@
             var repo = mock.Object;
 
             //Act
-            Action act = () => repo.CreateUser(new User("ADMIN", "ADMIN"));
+            void act() => repo.CreateUser(new User("ADMIN", "ADMIN"));
 
             //Assert
             Assert.Throws<Exception>(act);
+        }
+
+        [Fact(DisplayName = "I want to ensure that method CreateUser is called 3 times!")]
+        public void CreateThreeUsers()
+        {
+            //Arrange
+            var user1 = new User("ADMIN4", "ADMIN5");
+            var user2 = new User("ADMIN5", "ADMIN5");
+            var user3 = new User("ADMIN6", "ADMIN5");
+
+            var mock = new Mock<IUserService>();
+            mock.Setup(r => r.CreateUser(It.IsAny<User>()))
+                .Returns(user1);
+
+            var repo = mock.Object;
+
+            //Act
+            user1 = repo.CreateUser(user1);
+            user2 = repo.CreateUser(user2);
+            user3 = repo.CreateUser(user3);
+
+            //Assert
+            mock.Verify(r => r.CreateUser(It.IsAny<User>()), Times.Exactly(3));
         }
     }
 }

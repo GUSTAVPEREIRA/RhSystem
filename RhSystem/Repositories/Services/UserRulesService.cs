@@ -50,7 +50,9 @@
         {
             try
             {
-                UserRules existUseRules = _context.TbUserRules.Where(w => w.Id == userRules.Id).AsNoTracking().FirstOrDefault();
+                UserRules existUseRules = _context.TbUserRules.Where(w => w.Id == userRules.Id)
+                    .AsNoTracking()
+                    .FirstOrDefault();
 
                 if (existUseRules == null)
                 {
@@ -66,7 +68,7 @@
             catch (Exception ex)
             {
                 throw ex;
-            }            
+            }
         }
 
         public List<UserRules> GetUserRules()
@@ -78,7 +80,44 @@
             }
             catch (Exception ex)
             {
-                throw ex; 
+                throw ex;
+            }
+        }
+
+        public UserRules DeletedUserRules(int id)
+        {
+            try
+            {
+                var userRules = _context.TbUserRules.Where(w => w.Id == id).FirstOrDefault();
+
+                if (userRules == null)
+                {
+                    throw new Exception("Não foi encontrado nehuma regra de usuário!");
+                }
+
+                userRules.SetDeletedAt();
+
+                _context.Entry(userRules).State = EntityState.Modified;
+                _context.SaveChanges();
+
+                return userRules;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void PhysicalDeletedUserRules(UserRules userRules)
+        {
+            try
+            {
+                _context.Entry(userRules).State = EntityState.Deleted;
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
