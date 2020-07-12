@@ -5,17 +5,34 @@
     using System;
     using RHSystem;
     using RhSystem.Models;
+    using RhSystem.Controllers;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using RhSystem.Repositories.Services;
     using RhSystem.Repositories.IServices;
 
     public class UserTests
     {
-        private UserService UserServiceConfigureProvider()
+
+        private ApplicationContext _context;
+        private UserService _userService;
+        private UserRulesService _userRulesService;
+
+        private void UserServiceConfigureProvider()
+        {
+            _userService = new UserService(_context);
+        }
+
+        private void UserServiceRulesConfigureProvider()
+        {
+            _userRulesService = new UserRulesService(_context);
+        }
+
+        private void Context()
         {
             var options = new DbContextOptionsBuilder<ApplicationContext>().UseInMemoryDatabase("RHSystemTests").Options;
             var context = new ApplicationContext(options);
-            return new UserService(context);
+            _context = context;
         }
 
         [Theory(DisplayName = "I want to create a user!")]
@@ -24,11 +41,12 @@
         public void CreateUser(string expected, string username, string password)
         {
             //Arrange
-            var userService = this.UserServiceConfigureProvider();
+            Context();
+            UserServiceConfigureProvider();
 
             //Act
             User user = new User(username, password);
-            var createdUser = userService.CreateUser(user);
+            var createdUser = _userService.CreateUser(user);
 
             //Assert
             Assert.Equal(expected, createdUser.Username);
@@ -37,14 +55,14 @@
         [Fact(DisplayName = "I want to change a user!")]
         public void UpdateUser()
         {
-
-            //Arrange
-            var userService = this.UserServiceConfigureProvider();
-            User user = userService.CreateUser(new User("ADMIN2", "ADMIN"));
+            //Arrange            
+            Context();
+            UserServiceConfigureProvider();
+            User user = _userService.CreateUser(new User("ADMIN2", "ADMIN"));
 
             //Act
             user.Username = "ADMIN3";
-            var updatedUser = userService.UpdateUser(user);
+            var updatedUser = _userService.UpdateUser(user);
 
             //Assert
             Assert.Equal("ADMIN3", updatedUser.Username);
@@ -147,6 +165,25 @@
 
             //Assert
             mock.Verify(r => r.CreateUser(It.IsAny<User>()), Times.Exactly(3));
+        }
+
+        [Fact(DisplayName = "I want to ensure that called UserController with method CreateUser has been invoke then returns OkObjectResult")]
+        public void TestUserController()
+        {
+            //Arrange      
+            Context();
+            UserServiceConfigureProvider();
+            UserServiceRulesConfigureProvider();
+
+            var userRule = _userRulesService.CreateRule(new UserRules("ADMIN"));
+            var user = new User("ADMIN5", "ADMIN5");
+            user.RulesId = userRule.Id;
+            
+            //Act
+            var controller = new UserController(_userService, _userRulesService);
+            var result = controller.CreateUser(user);
+
+            Assert.IsType<OkObjectResult>(result.Result);            
         }
     }
 }
