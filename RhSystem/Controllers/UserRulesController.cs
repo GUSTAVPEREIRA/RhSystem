@@ -80,8 +80,7 @@
         }
 
         [HttpGet]
-        [Route("GetUserRules")]
-        [Authorize]
+        [Route("GetUserRules")]        
         public ActionResult<dynamic> GetUserRules()
         {
             try

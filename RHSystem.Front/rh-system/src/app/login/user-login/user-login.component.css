@@ -1,0 +1,26 @@
+.container-fluid {    
+    width: 70vh;
+  
+}
+
+label  {
+    color: white;
+}
+.fa-exclamation {
+    color: red;
+}
+.my-form {
+    margin: auto;
+}
+
+.body {                
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/assets/images/background-login.jpg");     
+    height: 100vh;
+}
+
+.EnterButton{
+    margin-bottom: -2rem;
+}

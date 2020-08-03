@@ -12,7 +12,7 @@
         public DbSet<Employees> TbEmployees { get; set; }
 
         public ApplicationContext()
-        {
+        { 
 
         }
 
