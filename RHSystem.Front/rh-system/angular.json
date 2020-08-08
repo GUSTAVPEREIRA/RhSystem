@@ -121,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rh-system"
+    }
+  },
+  "defaultProject": "rh-system",
+  "cli": {
+    "analytics": "ef516dd8-04c2-4b7f-9ec4-3ed6b01659f2"
+  }
 }
