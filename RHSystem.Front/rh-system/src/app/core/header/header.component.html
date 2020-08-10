@@ -1,22 +1,21 @@
 <header class="fixed-top" >
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" *ngIf="(user$ | async) as user; else home">HOME</a>
         <ng-template #home>
             <a class="navbar-brand text-center">
                 Bem vindo, ao RHSystem
             </a>
         </ng-template>
-
         <div *ngIf="(user$ | async) as user; else login" >
-            <i class="fa fa-user-circle mr-1"></i>
-            <a class="mr-1">{{user.username}}</a>
-            <a (click)="logout()" class=""> 
+            <i class="fa fa-user-circle mr-1 text-light"></i>
+            <a class="mr-1 text-light">{{user.username}}</a>
+            <a (click)="logout()" class="text-light"> 
                   Deslogar
             </a>
         </div>
         <ng-template #login>
             <span class="navbar-text">
-                <a [routerLink]="['']">
+                <a [routerLink]="['']" class="text-light">
                     Por favor, realize o login!
                 </a>
             </span>

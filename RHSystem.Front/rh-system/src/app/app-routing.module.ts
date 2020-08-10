@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router'
 import { AuthGuard } from './core/auth/auth.guard';
 import { NotFoundPageComponent } from './errors/not-found-page/not-found-page.component';
 import { UserLoginComponent } from './login/user-login/user-login.component';
+import { UserFormComponent } from './login/user-form/user-form.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,13 @@ const routes: Routes = [
         component: UserLoginComponent,
         canActivate: [AuthGuard]
     },
-    { path: '**', component: NotFoundPageComponent }
+    {
+        path: 'user/form',
+        component: UserFormComponent
+    },
+    {
+        path: '**', component: NotFoundPageComponent
+    }
 ];
 
 @NgModule({
