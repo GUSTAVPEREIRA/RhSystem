@@ -1,0 +1,46 @@
+<div class="body p-2">    
+    <div class="container-fluid mt-2 p-4">
+        <form [formGroup]="userForm" class="form mt-4" (submit)="userRegistry()">       
+            <div class="form-group justify-content-center row">                
+                <div class="col-md-12 mb-3">
+                    <label for="txtUsername" class="control-label">
+                        Username <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    </label>                              
+                    <input formControlName="userName" type="text" class="form-control" 
+                    id="txtUsername">                    
+                    <app-messages text="Username é um campo obrigatório"
+                    *ngIf="userForm.get('userName').errors?.required"></app-messages>         
+                    <app-messages text="Username já está em uso!"
+                    *ngIf="userForm.get('userName').errors?.userNameTaken"></app-messages>     
+                    <small *ngIf="userForm.get('userName').errors?.userNameTaken" 
+                    class="text-danger">Username não está disponível</small>                
+                    <small *ngIf="userForm.get('userName').valid" 
+                    class="text-success">Username está disponível</small>
+                </div>                     
+                <div class="col-md-12 mb-3">
+                    <label for="password" class="control-label">
+                        Senha <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    </label>
+                    <input formControlName="password" type="password" class="form-control" id="password">
+                    <app-messages text="Senha é um campo obrigatório!"
+                    *ngIf="userForm.get('password').errors?.required">
+                   </app-messages>  
+                </div>      
+                <div class="col-md-12 mb-3">
+                    <label for="regra" class="control-label">
+                        Regra <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    </label>
+                    <select formControlName="regra" id="regra" class="form-control">
+                        <option value="">
+                            ADMIN
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-12 mt-4 d-flex justify-content-end">                    
+                    <button [disabled]="userForm.invalid || userForm.pending" class="btn btn-success mr-2 col-md-1" type="submit">Cadastrar</button>
+                    <button class="btn btn-danger col-md-1" type="menu">Sair</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

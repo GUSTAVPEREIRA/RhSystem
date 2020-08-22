@@ -1,6 +1,6 @@
 <div class="body p-2">
-    <div class="container-fluid mt-5 p-4 border border-white">    
-        <form [formGroup]='loginForm' (submit)="login()">
+    <div class="container-fluid mt-5 p-4 border border-secondary">    
+        <form [formGroup]="loginForm" (submit)="login()">
             <div class="form-group justify-content-center row">
                 <div class="col-md-12 mb-3">
                     <label for="txtUsername" class="control-label">Username 
@@ -21,9 +21,7 @@
                      name="" id="txtPassword">              
                     <app-messages text="Senha é um campo obrigatório!"
                      *ngIf="loginForm.get('password').errors?.required">
-                    </app-messages>
-                    <app-messages text=""                     >
-                    </app-messages>   
+                    </app-messages>        
                 </div>           
                 <div class="col-md-12 mt-2 d-flex justify-content-end EnterButton">                    
                     <button [disabled]="loginForm.invalid" class="btn btn-primary" type="submit">Entrar</button>

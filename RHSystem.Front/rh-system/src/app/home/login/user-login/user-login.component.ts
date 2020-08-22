@@ -1,8 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../core/auth/auth.service';
+
 import { Router } from '@angular/router';
-import { PlatFormDetectorService } from '../../core/platform-detector/platform-detector.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { PlatFormDetectorService } from '../../../core/platform-detector/platform-detector.service';
 
 @Component({
   selector: 'app-user-login',

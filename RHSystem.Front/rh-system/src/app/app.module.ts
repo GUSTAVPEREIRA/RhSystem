@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorsModule } from './errors/errors.module';
-import { LoginModule } from './login/login.module';
 import { CoreModule } from './core/core.module';
+import { UserFormModule } from './home/login/user-form/user-form.module';
 
 @NgModule({
   declarations: [
@@ -17,8 +17,8 @@ import { CoreModule } from './core/core.module';
     BrowserModule,
     AppRoutingModule,
     ErrorsModule,
-    LoginModule,
-    CoreModule
+    CoreModule,
+    UserFormModule
   ],
   providers: [],
   bootstrap: [AppComponent]

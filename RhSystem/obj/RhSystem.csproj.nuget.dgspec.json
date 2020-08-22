@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj": {}
+    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\Projetos\\Desenvolvimento\\RHSystem\\RhSystem\\RhSystem\\RhSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj": {
+    "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\Projetos\\Desenvolvimento\\RHSystem\\RhSystem\\RhSystem\\RhSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj",
+        "projectUniqueName": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\Projetos\\Desenvolvimento\\RHSystem\\RhSystem\\RhSystem\\RhSystem.csproj",
         "projectName": "RhSystem",
-        "projectPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\RhSystem.csproj",
+        "projectPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\Projetos\\Desenvolvimento\\RHSystem\\RhSystem\\RhSystem\\RhSystem.csproj",
         "packagesPath": "C:\\Users\\gugup\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\C#\\Projetos\\Sistemas\\RH\\RHSystem\\RhSystem\\obj\\",
+        "outputPath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\Projetos\\Desenvolvimento\\RHSystem\\RhSystem\\RhSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gugup\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -95,6 +95,26 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUi": {
+              "target": "Package",
+              "version": "[5.5.1, )"
             }
           },
           "imports": [

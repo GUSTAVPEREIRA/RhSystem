@@ -19,10 +19,17 @@
             _userRulesService = userRulesService;
         }
 
+
+        /// <summary>
+        /// Cria um usuário
+        /// </summary>               
+        /// <response code="200">Retorna o usuário recém criado!</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response>            
+        /// <returns></returns>
         [Route("CreateUser")]
         [HttpPost]
         [Authorize]
-        public ActionResult<dynamic> CreateUser(User user)
+        public ActionResult<dynamic> CreateUser([FromBody] User user)
         {
             try
             {
@@ -46,7 +53,7 @@
         }
 
         [Route("DeleteUser/{id}")]
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Authorize]
         public ActionResult<dynamic> DeleteUser(int id)
         {
@@ -107,7 +114,7 @@
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Route("PhysicalDelete/{id}")]
         [Authorize]
         public ActionResult<dynamic> DeleteUserPhysical(int id)
@@ -127,6 +134,29 @@
                 {
                     Message = "Usuário foi deletado!",
                     Usuario = user.Username
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("UsernameExists/{username}")]
+        [Authorize]
+        public ActionResult<dynamic> CheckUsernameExist(string username)
+        {
+            try
+            {
+                var user = _userService.SearchUser(username, null);
+
+                bool UsernameExist = user != null ? true : false;
+
+                return new OkObjectResult(new
+                {
+                    Message = UsernameExist
+
                 });
             }
             catch (Exception ex)

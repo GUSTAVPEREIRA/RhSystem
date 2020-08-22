@@ -27,6 +27,10 @@ export class UserService {
     return this.userSubject.asObservable();
   }
 
+  getToken(){
+    return this.tokenService.getToken();
+  }
+
   private decodeNotify() {
     const token = this.tokenService.getToken();
     const userAux = jwt_decode(token) as UserToken;

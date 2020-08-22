@@ -50,7 +50,7 @@
             }
         }
 
-        private User SearchUser(string username, string password)
+        public User SearchUser(string username, string password)
         {
             try
             {

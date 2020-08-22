@@ -38,7 +38,7 @@
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("GetUserRulesById/{id}")]
         [Authorize]
         public ActionResult<dynamic> GetUserRulesById(int id)
@@ -98,7 +98,7 @@
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Route("PhysicalDelete/{id}")]
         [Authorize]
         public ActionResult<dynamic> DeleteUserRulesPhysical(int id)
@@ -127,7 +127,7 @@
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete]
         [Route("Delete/{id}")]
         [Authorize]
         public ActionResult<dynamic> DeleteUserRules(int id)

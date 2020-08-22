@@ -3,7 +3,7 @@
 }
 
 label  {
-    color: white;
+    color: black;
 }
 .fa-exclamation {
     color: red;
@@ -15,8 +15,8 @@ label  {
 .body {                
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("/assets/images/background-login.jpg");     
+    background-size: cover;    
+    background-color: white;
     height: 100vh;
 }
 
