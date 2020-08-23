@@ -2,13 +2,20 @@
 {
     using System;
     using System.Text;
+    using Newtonsoft.Json;
+    using RhSystem.Helpers;
     using System.Security.Cryptography;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public class User
     {
         public int Id { get; set; }
+
+        [Required]
         public string Username { get; set; }
+
+        [Required]
         public string Password { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; set; }
@@ -16,8 +23,10 @@
         public UserRules Rules { get; set; }
 
         [NotMapped]
+        [SwaggerIgnore]
         public Employees Employees { get; set; }
 
+        [Required]
         public int RulesId { get; set; }
 
         public User(string username, string password)

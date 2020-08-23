@@ -15,6 +15,7 @@ namespace RhSystem
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using RhSystem.Helpers;
 
     public class Startup
     {
@@ -59,6 +60,7 @@ namespace RhSystem
 
             services.AddSwaggerGen(c =>
             {
+                c.SchemaFilter<SwaggerIgnoreFilter>();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoAPI", Version = "v1" });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -104,8 +106,10 @@ namespace RhSystem
             {
                 c.RoutePrefix = string.Empty;
                 string swaggerJsonBasePath = string.IsNullOrWhiteSpace(c.RoutePrefix) ? "." : "..";
-                c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "RHSystem API");
+                c.SwaggerEndpoint($"{swaggerJsonBasePath}/swagger/v1/swagger.json", "RHSystem API");                     
             });
+
+
 
             app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

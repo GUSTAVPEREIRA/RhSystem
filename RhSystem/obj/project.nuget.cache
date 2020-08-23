@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "UlrlY5P5V89/07w7gqnqKuK67H+OiBKy+WdaIuxEBMYgxpnKfe+BCkjccLLY5JrfO8kh69iCYYU4hHIbUPMhLQ==",
+  "dgSpecHash": "WgBB95yFWhOiLpgCn1+fp3oxv4j28Gn/DaIqbG/UlOFPYG/QeIajZ4xA5oUSO6Wbq4DslcY5Xa3WYtQQQSXThQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\gugup\\OneDrive\\Área de Trabalho\\Projetos\\Desenvolvimento\\RHSystem\\RhSystem\\RhSystem\\RhSystem.csproj",
   "expectedPackageFiles": [
@@ -121,6 +121,7 @@
     "C:\\Users\\gugup\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\gugup\\.nuget\\packages\\simpleinjector\\5.0.3\\simpleinjector.5.0.3.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.2\\sqlitepclraw.bundle_e_sqlite3.2.0.2.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\sqlitepclraw.core\\2.0.2\\sqlitepclraw.core.2.0.2.nupkg.sha512",
     "C:\\Users\\gugup\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.2\\sqlitepclraw.lib.e_sqlite3.2.0.2.nupkg.sha512",

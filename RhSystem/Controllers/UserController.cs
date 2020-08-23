@@ -1,6 +1,7 @@
 ﻿namespace RhSystem.Controllers
 {
     using System;
+    using RhSystem.DTO;
     using RhSystem.Models;
     using Microsoft.AspNetCore.Mvc;
     using RhSystem.Repositories.IServices;
@@ -19,31 +20,43 @@
             _userRulesService = userRulesService;
         }
 
-
         /// <summary>
         /// Cria um usuário
-        /// </summary>               
+        /// </summary>        
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///     {
+        ///        "Username": ADMIN,
+        ///        "Password": "ADMIN",
+        ///        "RulesID": 2
+        ///     }
+        ///
+        /// </remarks>  
         /// <response code="200">Retorna o usuário recém criado!</response>
         /// <response code="400">Retorna nulo e a mensagem do erro</response>            
         /// <returns></returns>
         [Route("CreateUser")]
         [HttpPost]
         [Authorize]
-        public ActionResult<dynamic> CreateUser([FromBody] User user)
+        public ActionResult<dynamic> CreateUser([FromBody] UserDTO user)
         {
             try
             {
-                if (user.RulesId == 0)
+                if (user.RulesID == 0)
                 {
                     return BadRequest("Não foi informada a regra do usuário");
                 }
 
-                user.Rules = _userRulesService.GetUserRulesById(user.RulesId);
-                user = _userService.CreateUser(user);
+                User newUser = new User(user.Username, user.Password);
+
+                newUser.Rules = _userRulesService.GetUserRulesById(user.RulesID);
+                newUser = _userService.CreateUser(newUser);
 
                 return new OkObjectResult(new
                 {
-                    User = user
+                    User = newUser
                 });
             }
             catch (Exception ex)
@@ -52,6 +65,13 @@
             }
         }
 
+        /// <summary>
+        /// Deleta lógicamente um usuário
+        /// </summary>        
+        /// <param name="id">Código do usuário</param>
+        /// <response code="200">Retorna uma mensagem, informando o usuário que foi deletado lógicamente!</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response>            
+        /// <returns></returns>
         [Route("DeleteUser/{id}")]
         [HttpDelete]
         [Authorize]
@@ -72,15 +92,28 @@
             }
         }
 
+        /// <summary>
+        /// Atualiza os dados do usuário
+        /// </summary>                
+        /// <response code="200">Retorno o usuário</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response> 
         [Route("UpdateUser")]
         [HttpPut]
         [Authorize]
-        public ActionResult<dynamic> UpdateUser(User user)
+        public ActionResult<dynamic> UpdateUser([FromBody] UserDTO user)
         {
             try
             {
-                user = _userService.UpdateUser(user);
-                User updatedUser = _userService.GetUserForId(user.Id);
+                User updatedUser = _userService.GetUserForId(user.ID);
+
+                if (updatedUser != null)
+                {
+                    updatedUser.SetPassword(user.Password);                    
+                    updatedUser.Rules = _userRulesService.GetUserRulesById(user.RulesID);
+                }
+
+                _userService.UpdateUser(updatedUser);
+                updatedUser = _userService.GetUserForId(updatedUser.Id);
 
                 return new OkObjectResult(new
                 {
@@ -94,6 +127,12 @@
             }
         }
 
+        /// <summary>
+        /// Procura um usuário pelo código
+        /// </summary>        
+        /// <param name="id">Código do usuário</param>
+        /// <response code="200">Retorno o usuário</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response>  
         [Route("GetUser/{id}")]
         [HttpGet]
         [Authorize]
@@ -114,6 +153,12 @@
             }
         }
 
+        /// <summary>
+        /// Deleta físicamente um usuário
+        /// </summary>        
+        /// <param name="id">Código do usuário</param>
+        /// <response code="200">Retorna uma mensagem, informando o usuário que foi deletado físicamente!</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response>   
         [HttpDelete]
         [Route("PhysicalDelete/{id}")]
         [Authorize]
@@ -142,6 +187,12 @@
             }
         }
 
+        /// <summary>
+        /// Verifica se um usuário já existe
+        /// </summary>        
+        /// <param name="username">Código do usuário</param>
+        /// <response code="200">Retorna true caso o usuário exista, caso não false!</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response>   
         [HttpGet]
         [Route("UsernameExists/{username}")]
         [Authorize]
@@ -150,8 +201,7 @@
             try
             {
                 var user = _userService.SearchUser(username, null);
-
-                bool UsernameExist = user != null ? true : false;
+                bool UsernameExist = user != null;
 
                 return new OkObjectResult(new
                 {
