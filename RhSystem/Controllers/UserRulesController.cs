@@ -1,6 +1,7 @@
 ﻿namespace RhSystem.Controllers
 {
     using System;
+    using RhSystem.DTO;
     using RhSystem.Models;
     using Microsoft.AspNetCore.Mvc;
     using RhSystem.Repositories.IServices;
@@ -17,19 +18,39 @@
             _userRulesService = userRulesService;
         }
 
+        /// <summary>
+        /// Cria uma regra para o usuário
+        /// </summary>        
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///     {
+        ///        "Name": ADMIN,
+        ///        "IsAdmin": true,
+        ///        "PhysicalExclusion": true
+        ///     }
+        ///
+        /// </remarks>  
+        /// <response code="200">Retorna a regra de usuário recém criada!</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response>            
+        /// <returns></returns>
         [HttpPost]
         [Route("CreateUserRules")]
         [Authorize]
-        public ActionResult<dynamic> CreateUserRules(UserRules userRules)
+        public ActionResult<dynamic> CreateUserRules(UserRulesDTO userRules)
         {
             try
             {
-                _userRulesService.CreateRule(userRules);
+
+                UserRules newUserRules = new UserRules(userRules.Name, userRules.IsAdmin, userRules.PhysicalExclusion);
+
+                _userRulesService.CreateRule(newUserRules);
 
                 return new OkObjectResult(new
                 {
                     Message = "Regra criada com sucesso!",
-                    UserRule = userRules
+                    UserRule = newUserRules
                 });
             }
             catch (Exception ex)
@@ -38,6 +59,13 @@
             }
         }
 
+        /// <summary>
+        /// Cria uma regra para o usuário
+        /// </summary>                
+        /// <param name="id">Código da regra de usuário!</param>
+        /// <response code="200">Retorna a regra de usuário</response>
+        /// <response code="400">Retorna nulo e a mensagem do erro</response>            
+        /// <returns></returns>
         [HttpGet]
         [Route("GetUserRulesById/{id}")]
         [Authorize]
@@ -58,19 +86,47 @@
             }
         }
 
+        /// <summary>
+        /// Atualiza uma regra de usuário existente
+        /// </summary>           
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///     {
+        ///        "Name": ADMIN,
+        ///        "IsAdmin": true,
+        ///        "PhysicalExclusion": true
+        ///     }
+        ///
+        /// </remarks> 
+        /// <response code="200">Retorna a regra de usuário atualizada</response>
+        /// <response code="400">Retorna uma mensagem do erro</response>            
+        /// <returns></returns>
         [HttpPut]
         [Route("UpdateUserRules")]
         [Authorize]
-        public ActionResult<dynamic> UpdateUserRules(UserRules userRules)
+        public ActionResult<dynamic> UpdateUserRules(UserRulesDTO userRules)
         {
             try
             {
-                userRules = _userRulesService.UpdateUserRules(userRules);
+
+                UserRules updateUserRules = _userRulesService.GetUserRulesById(userRules.Id);
+
+                if (updateUserRules == null)
+                {
+                    throw new Exception("Regra de usuário não foi encontrada");
+                }
+
+                updateUserRules.IsAdmin = userRules.IsAdmin;
+                updateUserRules.PhysicalExclusion = userRules.PhysicalExclusion;
+                updateUserRules.Name = userRules.Name;
+                updateUserRules = _userRulesService.UpdateUserRules(updateUserRules);
 
                 return new OkObjectResult(new
                 {
                     Message = "Regra foi atualizada!",
-                    UserRules = userRules
+                    UserRules = updateUserRules
                 });
             }
             catch (Exception ex)
@@ -79,8 +135,14 @@
             }
         }
 
+        /// <summary>
+        /// Retorna uma lista de regras de usuário
+        /// </summary>           
+        /// <response code="200">Retorna uma lista de regra de usuário</response>
+        /// <response code="400">Retorna uma mensagem do erro</response>            
+        /// <returns></returns>
         [HttpGet]
-        [Route("GetUserRules")]        
+        [Route("GetUserRules")]
         public ActionResult<dynamic> GetUserRules()
         {
             try
@@ -98,6 +160,13 @@
             }
         }
 
+        /// <summary>
+        /// Deleta físicamente uma regra de usuário
+        /// </summary>           
+        /// <param name="id">Código da regra de usuário</param>
+        /// <response code="200">Retorna a regra de usuário e uma mensagem informando que ela foi deletada</response>
+        /// <response code="400">Retorna uma mensagem do erro</response>            
+        /// <returns></returns>
         [HttpDelete]
         [Route("PhysicalDelete/{id}")]
         [Authorize]
@@ -127,6 +196,13 @@
             }
         }
 
+        /// <summary>
+        /// Deleta lógicamente uma regra de usuário
+        /// </summary>           
+        /// <param name="id">Código da regra de usuário</param>
+        /// <response code="200">Retorna a regra de usuário e uma mensagem informando que ela foi deletada</response>
+        /// <response code="400">Retorna uma mensagem do erro</response>            
+        /// <returns></returns>
         [HttpDelete]
         [Route("Delete/{id}")]
         [Authorize]

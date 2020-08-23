@@ -2,8 +2,7 @@
 {
     using System;
     using System.Text;
-    using Newtonsoft.Json;
-    using RhSystem.Helpers;
+    using Newtonsoft.Json;    
     using System.Security.Cryptography;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -22,8 +21,7 @@
         public DateTime? DeletedAt { get; private set; }
         public UserRules Rules { get; set; }
 
-        [NotMapped]
-        [SwaggerIgnore]
+        [NotMapped]        
         public Employees Employees { get; set; }
 
         [Required]

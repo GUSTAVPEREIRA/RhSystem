@@ -75,7 +75,7 @@
         {
             try
             {
-                List<UserRules> lista = _context.TbUserRules.AsNoTracking().ToList();
+                List<UserRules> lista = _context.TbUserRules.AsNoTracking().Where(w => w.DeletedAt == null).ToList();
                 return lista;
             }
             catch (Exception ex)
