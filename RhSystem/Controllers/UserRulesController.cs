@@ -163,7 +163,7 @@
         /// <summary>
         /// Deleta físicamente uma regra de usuário
         /// </summary>           
-        /// <param name="id">Código da regra de usuário</param>
+        /// <param name="id">Código da regra do usuário</param>
         /// <response code="200">Retorna a regra de usuário e uma mensagem informando que ela foi deletada</response>
         /// <response code="400">Retorna uma mensagem do erro</response>            
         /// <returns></returns>
